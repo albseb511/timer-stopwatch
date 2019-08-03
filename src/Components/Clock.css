@@ -66,11 +66,11 @@
 .input{
     background-color: white;
     align-self:center;
-    width:150px;
+    width:200px;
     text-align: center;
     height:40px;
     border-color: transparent;
-    font-size: 24px;
+    font-size: 22px;
     align-items:center;
     flex:1;
     border-radius: 10px;
@@ -81,14 +81,14 @@
 .inputHMS{
     background-color: transparent;
     align-self:center;
-    width:150px;
+    width:200px;
     text-align: center;
     height:40px;
     border-color: transparent;
-    font-size: 24px;
+    font-size: 22px;
     justify-content:center;
     flex:1;
-    margin-left:175px;
+    margin-left:160px;
     margin-top: 10px;
 }
 

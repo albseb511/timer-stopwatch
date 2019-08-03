@@ -9,6 +9,7 @@ export default class StopWatch extends Component{
             runningState:false,
             value:0,
             reset:true,
+            ms:0,
             sec:0,
             min:0,
             hour:0,
@@ -21,8 +22,8 @@ export default class StopWatch extends Component{
     handleStart = () => {
             this.handleToggle()
             console.log('handle start called')
-            this.state.int=setInterval(()=>this.handleInterval(),1000)
-            setTimeout(()=>this.setState({reset: false}),1000)
+            this.state.int=setInterval(()=>this.handleInterval(),10)
+            setTimeout(()=>this.setState({reset: false}),10)
    
     }
 
@@ -35,9 +36,10 @@ export default class StopWatch extends Component{
     setValue = (t) => {
         this.setState({
             value: this.state.value+t,
-            sec: this.state.value%60,
-            min: Math.floor(this.state.value/60),
-            hour: Math.floor(this.state.value/3600)
+            ms: this.state.value%100,
+            sec: Math.floor(this.state.value/100)%60,
+            min: Math.floor(this.state.value/6000)%60,
+            hour: Math.floor(this.state.value/360000)
         })
         
     }
@@ -55,7 +57,8 @@ export default class StopWatch extends Component{
                         reset:true,
                         sec:0,
                         min:0,
-                        hour:0})
+                        hour:0,
+                        ms:0})
         console.log('handle Reset called')
     }
 
@@ -73,9 +76,10 @@ export default class StopWatch extends Component{
     <div className="body">
             <div className="hText">
                         <div className="inputHMS" >
-                            {this.state.hour} {'h '}
-                            {this.state.min} {'m '}
-                            {this.state.sec} {'s '}
+                            {this.state.value>100*60*60?(this.state.hour + ' h '):''}
+                            {this.state.value>100*60?(this.state.min + ' m '):''}
+                            {this.state.value>100?(this.state.sec + ' s '):''}
+                            {this.state.ms + ' ms '}
                         </div>
                 </div>
             <div className="footer">
