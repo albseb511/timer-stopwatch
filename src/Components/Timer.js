@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Footer from './Footer'
 
+var id =null;
 export default class Timer extends Component{
     constructor(props, context) {
         super(props, context);
@@ -12,7 +13,7 @@ export default class Timer extends Component{
             sec:0,
             min:0,
             hour:0,
-            int:'',
+            int:''
         };
       }
 
@@ -21,7 +22,7 @@ export default class Timer extends Component{
         {
             this.handleToggle()
             console.log('handle start called')
-            this.state.int=setInterval(()=>this.handleInterval(),1000)
+            id=setInterval(()=>this.handleInterval(),1000)
             setTimeout(()=>this.setState({reset: false}),1000)
         }
         else
@@ -60,7 +61,7 @@ export default class Timer extends Component{
 
     handleStop = ()=>{
         this.handleToggle()
-        clearInterval(this.state.int)
+        clearInterval(id)
         console.log('handle stop called')
 
 
@@ -69,7 +70,7 @@ export default class Timer extends Component{
       
   render(){
     return (
-    <div  className="body">
+    <div  className={this.props.display}>
             <div className="hText">
             {this.state.reset?(<input type="number" className="input" 
                     onChange={e=>{this.setState({value:e.target.value})}} 

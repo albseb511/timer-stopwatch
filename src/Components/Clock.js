@@ -4,24 +4,20 @@ import Header from './Header'
 import StopWatch from './StopWatch'
 import Timer from './Timer'
 
-
-
-
-
-
 class Clock extends React.Component {
     constructor(props){
         super(props)
       this.state = {
-            headerLeft: true,
-            stopWatchVal:0,
-            timerVal:0
+            headerLeft: 'body-normal',
+            headerRight:'body-none',
       }
     }
 
     funcTest = (a) =>{
         console.log('test called from child',a)
-        !a?this.setState({headerLeft:true}):this.setState({headerLeft:false})
+        !a?
+        this.setState({headerLeft:'body-normal',headerRight:'body-none'}):
+        this.setState({headerLeft:'body-none',headerRight:'body-normal'})
     }
 
     updateStopWatchVal =(a)=>{
@@ -36,13 +32,13 @@ class Clock extends React.Component {
       
           <div className="Container">
               <div className="header">
-                  <Header  func={()=>this.funcTest(0)} label="Timer"/>
-                  <Header  func={()=>this.funcTest(1)} label="Stop Watch"/>
+                  <Header  func={()=>this.funcTest(false)} label="Timer"/>
+                  <Header  func={()=>this.funcTest(true)} label="Stop Watch"/>
               </div>
               <div>
                   
-                  {this.state.headerLeft===true?( <Timer/>):
-                                                (<StopWatch/>)}
+                <Timer display={this.state.headerLeft}/>
+                <StopWatch display={this.state.headerRight}/>
                   
               </div>
 

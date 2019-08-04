@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import Footer from './Footer'
-
+var id=null
 export default class StopWatch extends Component{
+    
     constructor(props, context) {
         super(props, context);
     
@@ -13,7 +14,6 @@ export default class StopWatch extends Component{
             sec:0,
             min:0,
             hour:0,
-            int:'',
         };
       }
 
@@ -22,7 +22,7 @@ export default class StopWatch extends Component{
     handleStart = () => {
             this.handleToggle()
             console.log('handle start called')
-            this.state.int=setInterval(()=>this.handleInterval(),10)
+            id =setInterval(()=>this.handleInterval(),10)
             setTimeout(()=>this.setState({reset: false}),10)
    
     }
@@ -64,16 +64,14 @@ export default class StopWatch extends Component{
 
     handleStop = ()=>{
         this.handleToggle()
-        clearInterval(this.state.int)
+        clearInterval(id)
         console.log('handle stop called')
 
 
     }
-    
-      
   render(){
     return (
-    <div className="body">
+    <div className={this.props.display}>
             <div className="hText">
                         <div className="inputHMS" >
                             {this.state.value>100*60*60?(this.state.hour + ' h '):''}
